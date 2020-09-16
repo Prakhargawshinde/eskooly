@@ -1,0 +1,29 @@
+
+{% extends 'Blog_Application/base.html' %}
+{% load crispy_forms_tags %}
+{% load static%}
+{% block parentblock %}
+  <style media="screen">
+        h1{
+          margin-top:6%;
+
+          font-weight: bold;
+
+        }
+        body{
+          background-color: #00eded;
+      background-image: url("https://www.transparenttextures.com/patterns/asfalt-dark.png");
+      /* This is mostly intended for prototyping; please download the pattern and re-host for production environments. Thank you! */
+        }
+      </style>
+      <body>
+        <div class="container">
+        <h1>Welcome To Blog</h1>
+        <form class="linfrm" method="post">
+        {{form | crispy}}
+        {%csrf_token%}
+        <input type="submit" class="btn btn-success" name="" value="Login">
+        </form>
+        </div>
+      </body>
+{%endblock%}

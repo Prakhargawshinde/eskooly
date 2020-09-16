@@ -1,0 +1,95 @@
+{% extends 'Blog_Application/base.html' %}
+{% load static %}
+{% block parentblock %}
+<style media="screen">
+  .container{
+    margin-top:2%;
+    background:rgba(185, 181, 181,.4);
+    height:150px;
+  }
+
+  img{
+    margin-left:2%;
+    margin-top:2%;
+  }
+  #ab{
+    margin-top:-11%;
+    margin-left:45%;
+  }
+  #b{
+    margin-left: 18%;
+    margin-top:1%;
+  }
+  #c{
+    margin-left: 94%;
+    margin-top:-8%;
+  }
+  #d{
+    margin-top:5%;
+    margin-left: 40%;
+  }
+  .fa-trash{
+    margin-left:99%;
+  }
+  .btn-warning{
+    margin-top:1%;
+    margin-left:1%;
+
+  }
+  .Page{
+    margin-top:1.5%;
+    margin-left:1%;
+    font-weight:bold;
+    color:red;
+  }
+  body{
+    background-color: #00eded;
+background-image: url("https://www.transparenttextures.com/patterns/asfalt-dark.png");
+/* This is mostly intended for prototyping; please download the pattern and re-host for production environments. Thank you! */
+  }
+</style>
+<body>
+<h1>Welcome To View Blogs</h1>
+{% if post_blog_form_list %}
+  {% for blog in post_blog_form_list %}
+    <div class="container">
+
+
+        <p><a href="/Detail/{{blog.id}}"><img src="{{blog.Pic.url}}" height="100px" width="150px" alt="Blog Image"></p>
+        <p id="ab"><a href="/Detail/{{blog.id}}">{{blog.Title}}</a></p>
+        <p id="b"><a href="/Detail/{{blog.id}}">{{blog.Description | truncatechars:200}}</p>
+        <p id="c">By {{blog.Author}}</p>
+        <p id="d">{{blog.Date_time}}</p>
+        <form method="post">
+          {%csrf_token%}
+          <a href="/Delete/{{blog.id}}"><i class="fa fa-trash abcd" aria-hidden="true"></i></a>
+        </form>
+        </div>
+      {%endfor%}
+
+    {%else%}
+    <h2>No Data Found</h2>
+    {%endif%}
+    {% if is_paginated %}
+<ul class="pagination">
+{% if page_obj.has_previous %}
+    <li class="btn btn-warning text-dark">
+        <span><a href="?page={{ page_obj.previous_page_number }}">Previous</a></span>
+    </li>
+{% endif %}
+    <li class="Page">
+        <span>Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.</span>
+    </li>
+{% if page_obj.has_next %}
+    <li class="btn btn-warning text-dark">
+        <span><a href="?page={{ page_obj.next_page_number }}">Next</a></span>
+    </li>
+{% endif %}
+</ul>
+{% else %}
+    <p>Data not yet available</p>
+{% endif %}
+
+
+  </body>
+{%endblock%}

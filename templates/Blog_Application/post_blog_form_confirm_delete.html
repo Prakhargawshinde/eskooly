@@ -1,0 +1,26 @@
+{% extends 'Blog_Application/base.html' %}
+{% load static%}
+{% block parentblock %}
+<style media="screen">
+  .container{
+    margin-top:10%;
+  }
+  body{
+    background-color: #00eded;
+background-image: url("https://www.transparenttextures.com/patterns/asfalt-dark.png");
+/* This is mostly intended for prototyping; please download the pattern and re-host for production environments. Thank you! */
+  }
+</style>
+<body>
+<div class="container">
+
+
+<h1>Do You Want To Delete {{post_blog_form.Title}} ?</h1>
+<form method="post">
+  {%csrf_token%}
+<input class="btn btn-danger" type="submit" name="" value="Delete">
+</form>
+<a href="/ViewBlog" class="btn btn-success">Cancel</a>
+</div>
+</body>
+{%endblock%}

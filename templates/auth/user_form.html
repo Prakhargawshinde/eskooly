@@ -1,0 +1,58 @@
+{% extends 'Blog_Application/base.html' %}
+{% load static%}
+{% load crispy_forms_tags %}
+{% block parentblock %}
+<style media="screen">
+  body{
+    background-color: #00eded;
+background-image: url("https://www.transparenttextures.com/patterns/asfalt-dark.png");
+/* This is mostly intended for prototyping; please download the pattern and re-host for production environments. Thank you! */
+  }
+  h1{
+    margin-top:8%;
+    margin-bottom:2%;
+    text-align: center;
+  }
+  .just{
+    margin-left:45%;
+  }
+</style>
+<body>
+  <script type="text/javascript">
+      $(document).ready(function(){
+        $("#id_username").blur(function(){
+          var user = $("#id_username").val();
+
+  // jQuery methods go here...
+
+  $.ajax({
+    url:'/CheckUser',
+    data: {'username':user},
+    type: 'get',
+    dataType:'json',
+    success:function(response){
+      if (response.is_exist) {
+        alert('UserName Already Exist');
+        $("#id_username").val('');
+
+      }
+    }
+  });
+});
+});
+    </script>
+<div class="container">
+<h1 >New Registration</h1>
+
+<div class="row justify-content-center">
+<div class="col-lg-6">
+<form  method="post">
+{{form | crispy}}
+{%csrf_token%}
+<input type="submit" class="btn btn-success just" value="Register">
+</form>
+</div>
+</div>
+</div>
+</body>
+{%endblock%}
